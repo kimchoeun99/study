@@ -1,0 +1,33 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{kotex}
+\usepackage{amsmath}
+
+\title{assign1}
+\author{kimchoeun}
+\date{March 2023}
+
+\begin{document}
+\noindent\textbf{Theorem 5.6.6. Convergence theorem.} \textit{Suppose p is irreducible, aperiodic (i.e., all states have $d_{x} = 1$), and has stationary distribution $\pi$. Then, as $n \rightarrow \infty, p^{n}(x,y) \rightarrow \pi(y).$}\\
+
+\noindent\textit{Proof.} Let $S^{2} = S \times S.$ Define a transition probability $\bar{p}$ on $S \times S$ by $$\bar{p}((x_{1}, y_{1}), (x_{2}, y_{2})) = p(x_{1}, x_{2})p(y_{1}, y_{2})$$i.e., each coordinate moves independently. Our first step is to check that $\bar{p}$ is irreducible. This may seem like a silly thing to do first, but this is the only step that requires aperiodicity. Since $p$ is irreducible, there are $K, L,$ so that $p^{K}(x_{1}, x_{2}) > 0$ and $p^{L}(y_{1}, y_{2}) > 0.$ From Lemma 5.6.5 it follows that if $M$ is large $p^{L+M}(x_{2}, x_{2}) > 0$ and $p^{K+M}(y_{2}, y_{2}) > 0$, so $$\bar{p}^{K+L+M}((x_{1}, y_{1}), (x_{2}, y_{2})) > 0$$
+
+Our second step is to observe that since the two coordinates are independent, $\bar{\pi}(a, b) = \pi(a)\pi(b)$ defines a stationary distribution for $\bar{p}$, and Theorem 5.5.10 implies that for $\bar{p}$ all states are recurrent. Let $(X_{n}, Y_{n})$ denote the chain on $S \times S$, and let $T$ be the first time that this chain hits the diagonal $\{(y, y) : y \in S\}$. Let $T_{(x, x)}$ be the hitting time of $(x, x).$ Since $\bar{p}$ is irreducible and recurrent, $T_{(x, x)} < \infty$ a.s. and hence $T < \infty$ a.s. The final step is to observe that on $\{T \le n\}$, the two coordinates $X_{n}$ and $Y_{n}$ have the same distribution. By considering the time and place of the first intersection and then using the Markov property, 
+
+\begin{align}
+P(X_{n} = y, T \le n) & = \sum_{m=1}^{n}\sum_{x}^{}P(T = m, X_{m} = x, X_{n} = y)\nonumber\\ 
+& = \sum_{m=1}^{n}\sum_{x}^{}P(T = m, X_{m} = x)P(X_{n} = y|X_{m} = x)\nonumber\\
+& = \sum_{m=1}^{n}\sum_{x}^{}P(T = m, Y_{m} = x)P(Y_{n} = y|Y_{m} = x)\nonumber\\
+& = P(Y_{n} = y, T \le n)\nonumber
+\end{align}
+
+\noindent To finish up, we observe that
+\begin{align}
+P(X_{n} = y) & = P(Y_{n} = y, T \le n) + P(X_{n} = y, T > n)\nonumber\\
+& \le P(Y_{n} = y) + P(X_{n} = y, T > n)\nonumber
+\end{align}
+and similarly, $P(Y_{n} = y) \le P(X_{n} = y) + P(Y_{n} = y, T > n).$ So $$|P(X_{n} = y) - P(Y_{n} = y)| \le P(X_{n} = y, T > n) + P(Y_{n} = y, T > n)$$ and summing over y gives $$\sum_{y}^{}|P(X_{n} = y) - P(Y_{n} = y) | \le 2P(T > n)$$
+If we let $X_{0} = x$ and let $Y_{0}$ have the stationary distribution $\pi$, then $Y_{n}$ has distribution $\pi$, and it follows that $$\sum_{y}^{}|p^{n}(x, y) - \pi(y)| \le 2P(T > n) \to 0$$ proving the desired result. If we recall the definition of the total variation distance given in Section 3.6, the last conclusion can be written as $$\|p^{n}(x, \cdot) - \pi(\cdot)\| \le P(T > n) \to 0$$
+
+
+\end{document}
